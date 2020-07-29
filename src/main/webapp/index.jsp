@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" href="" type="image/x-icon">
 	<jsp:include page="/include/head.jsp" />
 </head>
 <body>
