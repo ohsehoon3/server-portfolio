@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam.mapper.MemberMapper">
+	<insert id="insert"> <!-- id속성은 메소드 이름 -->
+		INSERT INTO member (id,passwd,name,age,gender,email,reg_date,address,tel,mtel,grade) 
+		VALUES (#{id}, #{passwd}, #{name}, #{age}, #{gender}, #{email}, #{regDate}, #{address}, #{tel}, #{mtel}, #{grade}) 
+	</insert>
+	
+	<select id="getMembers" resultType="MemberVo">
+		SELECT * 
+		FROM member 
+		<if test="category != null and category == 'id'">
+			WHERE id LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		<if test="category != null and category == 'gender'">
+			WHERE gender LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		<if test="category != null and category == 'grade'">
+			WHERE grade LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		ORDER BY id DESC 
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getTotalCount" resultType="_int"> 
+		SELECT count(*) 
+		FROM member
+		<if test="category == 'id'">
+			WHERE id LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		<if test="category == 'gender'">
+			WHERE gender LIKE CONCAT('%', #{search}, '%') 
+		</if>
+		<if test="category == 'grade'">
+			WHERE grade LIKE CONCAT('%', #{search}, '%') 
+		</if>
+	</select>
+	
+	<update id="update">
+		UPDATE member 
+		SET passwd=#{passwd}, name=#{name}, age=#{age}, gender=#{gender}, email=#{email}, address=#{address}, tel=#{tel}, mtel=#{mtel}, grade=#{grade}
+		WHERE id=#{id} 
+	</update>
+	
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/> <!-- '_'를 낙타표기법으로 자동설정. 기본값: false -->
+	</settings>
+
+	<!-- 별칭 등록하기 -->
+	<typeAliases>
+		<package name="exam.vo"/> <!-- 패키지 전체 자동등록 -->
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" /><!-- JDBC: 수동커밋, MANAGED: 자동커밋 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/ohse?useUnicode=true&amp;characterEncoding=utf8&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=Asia/Seoul" />
+				<property name="username" value="jspuser" />
+				<property name="password" value="jsppass" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<!-- exam.mapper 패키지의 인터페이스를 구현한
+			 Mapper 객체를 자동으로 만들어서 메모리에 준비함. --> 
+ 		<package name="exam.mapper" /> 
+<!-- 		<mapper class="exam.mapper.AttachfileMapper" /> -->
+<!-- 		<mapper class="exam.mapper.BoardMapper" /> -->
+<!-- 		<mapper class="exam.mapper.MemberMapper" /> -->
+	</mappers>
+</configuration>
